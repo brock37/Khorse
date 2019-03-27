@@ -154,7 +154,7 @@ bool Joueur::estPartit()
     return false;
 }
 
-
+/*
 Coordonnes Joueur::caseDapres(Coordonnes pion, unsigned int avancement)
 {
     //Definis la case suivante a patir de la position du pion sur le plateau
@@ -200,7 +200,7 @@ Coordonnes Joueur::caseDapres(Coordonnes pion, unsigned int avancement)
  
  // 
   return prochaineCase;
-}
+}*/
 
 int Joueur::lancerde(int dernierLancer)
 {
