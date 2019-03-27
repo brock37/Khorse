@@ -12,7 +12,7 @@ Jeu::Jeu()
 	std::cout << "Avec combien de pion voulez-vous jouer? " ;
    m_nombrePion= 1;//cin >> nombrePion;
    std::cout << "Avec combien de joueur voulez-vous jouer? " ;
-   m_nombreJoueur= 2;//cin >> nombreAdversaire;
+   m_nombreJoueur= 1;//cin >> nombreAdversaire;
    
 	//Creer les joueurs et pions necessaires
     m_joueur.push_back(new Joueur(&m_plateau,m_nombrePion, ROUGE));
