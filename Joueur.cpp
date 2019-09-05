@@ -206,6 +206,8 @@ int Joueur::lancerde(int dernierLancer)
 {
 	int res=6;
     //int res= (rand() + dernierLancer) % 6 + 1;
+    std::cout << "Entrer la valeur du de : ";
+    std::cin >> res;
     std::cout << "Resultat du lance: "<<res << std::endl;
     return res;
 }

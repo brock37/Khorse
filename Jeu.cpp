@@ -114,6 +114,19 @@ void Jeu::jouerTour(int joueur)
 			{
 				//REcupere les coordonnes de la prochaine case
 				caseSuivante= m_plateau.caseDapres( pion->getCoord(), pion->getCaseCourante());
+                //Si l'avancement et = 54 (en bas de la ligne droite de fin
+                //On regarde le resultat du de savoir si il est egal au charactere
+                if(pion->getCaseCourante() >= 55)
+                {
+                    std::cout << "ResDe= " << resDe << " , " << (int)m_plateau.getCase( caseSuivante).getType() - (int)'0' << std::endl;
+                    if(resDe != (int)m_plateau.getCase( caseSuivante).getType() - (int)'0')
+                    {
+                        std::cout << "On avance pas" << std::endl;  
+                        break;
+                    }
+                }
+                
+                //Sinon on avance normalement
 				//Si la case et occuper
 				if( occupationCase( caseSuivante))
 				{
@@ -130,7 +143,9 @@ void Jeu::jouerTour(int joueur)
 						manger(occupant);
 					}					
 				}
-
+				
+				
+                pion->memoireCaseSol(m_plateau.getCase(caseSuivante));
 				pion->goToXY( caseSuivante);
 				pion->deplacer();
 				retour= 1;

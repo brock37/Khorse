@@ -15,7 +15,7 @@ class Plateau
       virtual ~Plateau();
       void initialiser();
       void afficher();
-      char afficherCase(int x, int y);
+      //char afficherCase(int x, int y);
 		Case& getCase(int index);
 		Case& getCase(Coordonnes pos);
 		void changerCase(int i, int j, char type);
