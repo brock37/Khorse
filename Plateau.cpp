@@ -39,7 +39,31 @@ void Plateau::afficher()
     for(int i(0); i < 15; i++ )
     {
         for(int j(0); j < 15; j++ )
-            std::cout << m_plateau[j+i*15].getType() << " " ;
+        {
+            char car= m_plateau[j+i*15].getType();
+            switch(car)
+            {
+            case 'R':
+
+                std::cout << "\033[1;31m" << car << "\033[0m" <<" " ;
+            break;
+            case 'V':
+
+                std::cout << "\033[1;32m" << car << "\033[0m" <<" " ;
+            break;
+            case 'B':
+
+                std::cout << "\033[1;34m" << car << "\033[0m" <<" " ;
+            break;
+            case 'J':
+
+                std::cout << "\033[1;33m" << car << "\033[0m" <<" " ;
+            break;
+            default:
+                std::cout << car << " " ;
+            break;
+            }
+        }
 
         std::cout << std::endl;
     }
