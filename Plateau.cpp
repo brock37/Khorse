@@ -70,10 +70,10 @@ void Plateau::afficher()
 
 }
 
-char Plateau::afficherCase(int i, int j)
+/*char Plateau::afficherCase(int i, int j)
 {
     return m_plateau[j+i*15].getType() ;
-}
+}*/
 
 Case& Plateau::getCase(int index)
 {
