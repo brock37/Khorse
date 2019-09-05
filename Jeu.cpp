@@ -158,7 +158,7 @@ void Jeu::jouerTour(int joueur)
 
 bool Jeu::gameOver()
 {
-	
+	return true;
 }
 
 
