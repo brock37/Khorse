@@ -36,10 +36,14 @@ void Jeu::jouerPartie()
 	int tourJoueur=0;
    bool gagne= false;
 	int waiting=0;
-	
+  Joueur* joueurActuel= NULL;
+
 	do
 	{
+    joueurActuel= getJoueur(tourJoueur);
+
 		system("clear");
+    std::cout << "Tour du Joueur " << joueurActuel->getLettre() << std::endl;
 
 		m_plateau.afficher();
 		jouerTour(tourJoueur);
@@ -47,18 +51,41 @@ void Jeu::jouerPartie()
 
 		std::cin >> waiting;
 		system("clear");
-		std::cout << "Fin du tour!" <<std::endl;
+
+
+		std::cout << "Etat du plateau a  la fin du tour" <<std::endl;
 
 		m_plateau.afficher();
 		std::cin >> waiting;
+
+    //Pour chaque pion du joueurs
+    //Verifier si il sont arriver
+    //si oui gagne = true
+
+    gagne= true;
+    for(int i= 0; i < m_nombrePion; i++)
+    {
+      if(joueurActuel->getPionPtr(i)->estArriver() == false)
+      {
+        gagne= false;
+      }
+    }
 
 		if(tourJoueur < getNombreJoueur()-1)    {tourJoueur++;}
 		else                                {tourJoueur=0;}
 
 
-		system("clear");
+		//system("clear");
+
+
 
 	}while(!gagne);
+
+  char end;
+  m_plateau.afficher();
+  std::cout << "Le Joueur " << joueurActuel->getLettre() << " a gagné" << std::endl;
+  cin >> end;
+
 }
 
 void Jeu::jouerTour(int joueur)
