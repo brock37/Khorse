@@ -97,16 +97,16 @@ void Jeu::jouerTour(int joueur)
 		{
 			choixJoueur= AVANCER;
 		}
-		
+
 		//Si une action possible
 		if( choixJoueur != RIEN)
 		{
 			numPion= joueurActuel->choixPionADeplacer();
 			pion= joueurActuel->getPionPtr(numPion);
 		}
-		
+
 		//On agit en fontion du choix de l'action
-		if(choixJoueur == AVANCER && !pion->estRentrer())
+		if(choixJoueur == AVANCER && !pion->estRentrer() && pion->getCaseCourante() < 62)
 		{
 			m_plateau.getCase(pion->getCoord()).quitterCase( pion->getMemoireSol());
 			//Pour chaque case a avancer
@@ -114,19 +114,27 @@ void Jeu::jouerTour(int joueur)
 			{
 				//REcupere les coordonnes de la prochaine case
 				caseSuivante= m_plateau.caseDapres( pion->getCoord(), pion->getCaseCourante());
-                //Si l'avancement et = 54 (en bas de la ligne droite de fin
-                //On regarde le resultat du de savoir si il est egal au charactere
-                if(pion->getCaseCourante() >= 55)
-                {
-                    std::cout << "ResDe= " << resDe << " , " << (int)m_plateau.getCase( caseSuivante).getType() - (int)'0' << std::endl;
-                    if(resDe != (int)m_plateau.getCase( caseSuivante).getType() - (int)'0')
-                    {
-                        std::cout << "On avance pas" << std::endl;  
-                        break;
-                    }
-                }
-                
-                //Sinon on avance normalement
+
+        //Si l'avancement et = 54 (en bas de la ligne droite de fin
+        //On regarde le resultat du dé pour savoir si il est egal au num de la case
+        if(pion->getCaseCourante() >= 55 && pion->getCaseCourante() <= 61 )
+        {
+            //std::cout << "ResDe= " << resDe << " , " << (int)m_plateau.getCase( caseSuivante).getType() - (int)'0' << std::endl;
+            if(m_plateau.getCase( caseSuivante).getType() == 'X' && resDe == 6)
+            {
+              std::cout << "Le pion est arrivé" << std::endl;
+              pion->arriver();
+            }
+            else if(resDe != (int)m_plateau.getCase( caseSuivante).getType() - (int)'0')
+            {
+                std::cout << "On avance pas" << std::endl;
+                break;
+            }
+            nombreDeCase = 0;
+        }
+
+
+        //Sinon on avance normalement
 				//Si la case et occuper
 				if( occupationCase( caseSuivante))
 				{
@@ -141,14 +149,20 @@ void Jeu::jouerTour(int joueur)
 					{
 						std::cout << "Pion manger" << std::endl;
 						manger(occupant);
-					}					
+					}
 				}
-				
-				
-                pion->memoireCaseSol(m_plateau.getCase(caseSuivante));
+
+
+        pion->memoireCaseSol(m_plateau.getCase(caseSuivante));
 				pion->goToXY( caseSuivante);
 				pion->deplacer();
 				retour= 1;
+
+        if( pion->getCaseCourante() == 62)
+        {
+          break;
+        }
+
 			}
 		}
 		else if(choixJoueur == SORTIR)
@@ -166,9 +180,9 @@ void Jeu::jouerTour(int joueur)
 		retourAction(retour);
 	}
 
-	
+
 	std::cout << "Fin du tour!" <<std::endl;
-	
+
 }
 
 bool Jeu::gameOver()

@@ -20,8 +20,10 @@ class Pion
       void memoireCaseSol(Case& sol);
       void sortir(){m_dansLeBox = false; m_caseCourante++;}
       void rentrer();
+			void arriver(){m_arriver = true;}
 
       bool estRentrer(){return m_dansLeBox;}
+			bool estArriver(){return m_arriver;}
       Coordonnes getCoord(){return m_position;}
       char getMemoireSol(){return m_solCase;}
       int getCaseCourante(){return m_caseCourante;}
