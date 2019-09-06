@@ -154,61 +154,16 @@ bool Joueur::estPartit()
     return false;
 }
 
-/*
-Coordonnes Joueur::caseDapres(Coordonnes pion, unsigned int avancement)
-{
-    //Definis la case suivante a patir de la position du pion sur le plateau
-    //Commence a la ligne de la sortue du cheval rouge puis dans le sens du jeu
-    Coordonnes prochaineCase=std::pair<int, int>(pion.first,pion.second);
-    if( avancement < 55)
-    {
-        if( pion.first == 6 && (pion.second > 8 && pion.second < 14))          {prochaineCase.second--;}
-        else if( pion.first == 6 && pion.second == 8)    {prochaineCase.first--;}
-        else if( (pion.first > 0 && pion.first < 6)  && pion.second == 8)    {prochaineCase.first--;}
-        else if( pion.first == 0 && pion.second == 8)    {prochaineCase.second--;}
-        else if( pion.first == 0 && pion.second > 6)     {prochaineCase.second--;}
-        else if( pion.first == 0 && pion.second == 6)    {prochaineCase.first++;}
-        else if( pion.first < 6 && pion.second == 6)     {prochaineCase.first++;}
-        else if( pion.first == 6 && pion.second == 6)    {prochaineCase.second--;}
-        else if( pion.first == 6 && pion.second > 0)     {prochaineCase.second--;}
-        else if( pion.first == 6 && pion.second == 0)    {prochaineCase.first++;}
-        else if( pion.first < 8 && pion.second == 0)     {prochaineCase.first++;}
-        else if( pion.first == 8 && pion.second == 0)    {prochaineCase.second++;}
-        else if( pion.first == 8 && pion.second < 6)     {prochaineCase.second++;}
-        else if( pion.first == 8 && pion.second == 6)    {prochaineCase.first++;}
-        else if( pion.first < 14 && pion.second == 6)    {prochaineCase.first++;}
-        else if( pion.first == 14 && pion.second == 6)   {prochaineCase.second++;}
-        else if( pion.first == 14 && pion.second < 8)    {prochaineCase.second++;}
-        else if( pion.first == 14 && pion.second == 8)   {prochaineCase.first--;}
-        else if( pion.first > 8 && pion.second == 8)     {prochaineCase.first--;}
-        else if( pion.first == 8 && pion.second == 8)    {prochaineCase.second++;}
-        else if( pion.first == 8 && pion.second < 14)    {prochaineCase.second++;}
-        else if( pion.first == 8 && pion.second == 14)   {prochaineCase.first--;}
-        else if( pion.first > 6 && pion.second == 14)    {prochaineCase.first--;}
-    }
-    else
-    {
-        if( pion.first == 7 && pion.second == 14)        { prochaineCase.second--;}
-        else if( pion.first == 7 && pion.second == 0)    { prochaineCase.second++;}
-        else if( pion.first == 0 && pion.second == 7)    { prochaineCase.first--;}
-        else if( pion.first == 14 && pion.second == 7)   { prochaineCase.first++;}
-    }
 
-    std::cout << pion.first << " " << pion.second << std::endl;
-    std::cout << prochaineCase.first << " " << prochaineCase.second << std::endl;
-
-
- //
-  return prochaineCase;
-}*/
 
 int Joueur::lancerde(int dernierLancer)
 {
 	int res=6;
     //int res= (rand() + dernierLancer) % 6 + 1;
+    //std::cout << "Resultat du lance: "<<res << std::endl;
     std::cout << "Entrer la valeur du de : ";
     std::cin >> res;
-    std::cout << "Resultat du lance: "<<res << std::endl;
+
     return res;
 }
 
