@@ -3,6 +3,7 @@
 
 #include "constantes.h"
 #include <list>
+#include <vector>
 #include "Plateau.h"
 #include "Pion.h"
 
@@ -36,6 +37,12 @@ class Joueur
       Pion* getPionPtr(int n);
       
         
+
+
+			std::string pionDisponible(std::vector<int> v);
+			Pion* choixJoueur(int de, Choix &choix );
+
+
 	protected:
    private:
 		std::list<Pion*> m_pions;

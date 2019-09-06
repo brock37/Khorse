@@ -38,6 +38,8 @@ void Jeu::jouerPartie()
 	int waiting=0;
   Joueur* joueurActuel= NULL;
 
+  system("sleep 1");
+
 	do
 	{
     joueurActuel= getJoueur(tourJoueur);
@@ -114,7 +116,7 @@ void Jeu::jouerTour(int joueur)
 		}
 	}
 	else 		//Joueur Humain
-	{
+	{/*
 		//On propose le choix de l'action suivant le resultat du de
 		if(resDe == 6 || resDe == 1 )
 		{
@@ -131,7 +133,8 @@ void Jeu::jouerTour(int joueur)
 			numPion= joueurActuel->choixPionADeplacer();
 			pion= joueurActuel->getPionPtr(numPion);
 		}
-
+*/
+    pion = joueurActuel->choixJoueur(resDe, choixJoueur);
 		//On agit en fontion du choix de l'action
 		if(choixJoueur == AVANCER && !pion->estRentrer() && pion->getCaseCourante() < 62)
 		{
@@ -249,4 +252,3 @@ void Jeu::manger(Pion* occupant)
 	//On replace le pion sur le plateau
 	m_plateau.getCase(occupant->getCoord()).setType(occupant->getLettre());
 }
-

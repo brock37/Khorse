@@ -59,7 +59,7 @@ int Joueur::sortirCheval(int numeroPion, Plateau &plateau)
 
     m_refPlateau->getCase(indexAncienneCase).setType(ancienChar);
     (*it)->sortir();
-    
+
     for(int i= 0; i < m_nombrePions; i++)
     {
 		 std::list<Pion*>::iterator itBis= getPion( i);
@@ -67,7 +67,7 @@ int Joueur::sortirCheval(int numeroPion, Plateau &plateau)
 		 {
 			 m_refPlateau->getCase(indexAncienneCase).setType(m_lettre);
 		 }
-	 } 
+	 }
 
 	 Coordonnes caseSuivante= std::pair<int, int>(0,0);
     switch(m_couleur)
@@ -79,7 +79,7 @@ int Joueur::sortirCheval(int numeroPion, Plateau &plateau)
         default:    std::cout << "Erreur lors de la sortie du pion." << std::endl;    break;
     }
 	(*it)->memoireCaseSol( m_refPlateau->getCase(caseSuivante.first + caseSuivante.second*15));
-	(*it)->goToXY(caseSuivante); 
+	(*it)->goToXY(caseSuivante);
 
     placerCheval(it);
     return 2;
@@ -197,8 +197,8 @@ Coordonnes Joueur::caseDapres(Coordonnes pion, unsigned int avancement)
     std::cout << pion.first << " " << pion.second << std::endl;
     std::cout << prochaineCase.first << " " << prochaineCase.second << std::endl;
 
- 
- // 
+
+ //
   return prochaineCase;
 }*/
 
@@ -243,7 +243,7 @@ int Joueur::choixPionADeplacer()
 	{
 		pionDeplacer= 0;
 	}
-	
+
 	return pionDeplacer;
 }
 
@@ -255,7 +255,7 @@ Choix Joueur::choixAction()
 		std::cout << "1.AVANCER / 2.SORTIR" << std::endl;
 		std::cin >> choix;
 	}while(choix!=AVANCER && choix != SORTIR);
-	
+
 	if(choix== 1)
 	{
 		return AVANCER;
@@ -264,4 +264,76 @@ Choix Joueur::choixAction()
 	{
 		return SORTIR;
 	}
+}
+
+Pion* Joueur::choixJoueur(int de, Choix &choix )
+{
+
+  std::vector<int> pionDispo;
+  int c = 0, pionDeplacer=0;
+  //Choix de l'action
+  if(de == 6 || de == 1 )
+  {
+    do
+    {
+      std::cout << "1.AVANCER / 2.SORTIR" << std::endl;
+      std::cin >> c;
+    }while(c!=AVANCER && c != SORTIR);
+    if(c== 1)
+    {
+      choix= AVANCER;
+    }
+    else
+    {
+      choix= SORTIR;
+    }
+
+  }
+  else if( estPartit())   		//Resultat autre que 6 ou 1
+  {
+    choix= AVANCER;
+  }
+  else
+  {
+    choix = RIEN;
+  }
+
+//Choix du pion en fonciton de l'action
+  //on creer un tableau qui contient l'index des pions dispo en fonction de
+  //leur status
+  for( int i =0 ; i < m_nombrePions - 1 ; i++)
+  {
+    if( choix == AVANCER && getPionPtr(i)->estRentrer() == false )
+    {
+      std::cout << "Pion n° "<< i <<" diponible pour avencer" << std::endl;
+      pionDispo.push_back(i);
+    }
+    else if( choix == SORTIR && getPionPtr(i)->estRentrer() == true )
+    {
+      std::cout << "Pion n° "<< i <<" diponible pour sortir" << std::endl;
+      pionDispo.push_back(i);
+    }
+  }
+
+
+  std::cout << "Quel pion ?" << pionDisponible(pionDispo)<< ":";
+  std::cin >> pionDeplacer;
+
+  return getPionPtr(pionDeplacer);
+
+}
+
+std::string Joueur::pionDisponible(std::vector<int> v)
+{
+  std::string s= "[ ";
+
+  for(int j; j < v.size(); j++)
+  {
+    s.push_back(v[j]);
+    s+= " , ";
+  }
+
+  s.erase( s.end() - 3 );
+  s += "]";
+  return s;
 }
