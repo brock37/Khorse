@@ -10,7 +10,7 @@ Jeu::Jeu()
 	
 	//Recuperer parametre de la partie
 	std::cout << "Avec combien de pion voulez-vous jouer? " ;
-   m_nombrePion= 1;//cin >> nombrePion;
+   m_nombrePion= 4;//cin >> nombrePion;
    std::cout << "Avec combien de joueur voulez-vous jouer? " ;
    m_nombreJoueur= 1;//cin >> nombreAdversaire;
    

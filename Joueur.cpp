@@ -82,6 +82,8 @@ int Joueur::sortirCheval(int numeroPion, Plateau &plateau)
 	(*it)->goToXY(caseSuivante);
 
     placerCheval(it);
+    std::string s = "Le pion n" + to_string((*it)->getNumPion()) + " est sortie";
+    std::cout << s  << std::endl;
     return 2;
 }
 
@@ -110,13 +112,18 @@ void Joueur::afficherEtatJoueur()
 
     std::cout << "Nombre de pion total:" << m_nombrePions << std::endl;
     std::list<Pion*>::iterator it;
+    std::string strSortie;
     for(it= m_pions.begin(); it != m_pions.end(); it++)
     {
         if(!(*it)->estRentrer())
-            nombreChevauxSortie++;
+        {
+          nombreChevauxSortie++;
+          strSortie =strSortie + to_string( (*it)->getNumPion()) + ": " + to_string((*it)->estRentrer());
+        }
+            
     }
 
-    std::cout << "Nombre de pion sortie:" << nombreChevauxSortie << std::endl;
+    std::cout << "Nombre de pion sortie:" << nombreChevauxSortie << " Chevaux sorite: " << strSortie << std::endl;
     for(it= m_pions.begin(); it != m_pions.end(); it++)
     {
         std::cout << "position pion n" << i  << ":" << (*it)->getCoord().first << " " << (*it)->getCoord().second << std::endl;
@@ -178,6 +185,7 @@ Pion* Joueur::getPionPtr(int n)
 {
 	std::list< Pion* >::iterator it= m_pions.begin();
 	std::advance(it, n);
+  std::cout << "GetPionPtr: " << (*it)->getNumPion() << std::endl;
 	return (*it);
 }
 
@@ -256,39 +264,52 @@ Pion* Joueur::choixJoueur(int de, Choix &choix )
 //Choix du pion en fonciton de l'action
   //on creer un tableau qui contient l'index des pions dispo en fonction de
   //leur status
-  for( int i =0 ; i < m_nombrePions - 1 ; i++)
+  for( std::list< Pion* >::iterator it= m_pions.begin() ; it !=m_pions.end() ; it++)
   {
-    if( choix == AVANCER && getPionPtr(i)->estRentrer() == false )
+    if( choix == AVANCER && (*it)->estRentrer() == false )
     {
-      std::cout << "Pion n° "<< i <<" diponible pour avencer" << std::endl;
-      pionDispo.push_back(i);
+      std::cout << "Pion n° "<< (*it)->getNumPion() <<" diponible pour avancer" << std::endl;
+      pionDispo.push_back( (*it)->getNumPion());
     }
-    else if( choix == SORTIR && getPionPtr(i)->estRentrer() == true )
+    else if( choix == SORTIR && (*it)->estRentrer() == true )
     {
-      std::cout << "Pion n° "<< i <<" diponible pour sortir" << std::endl;
-      pionDispo.push_back(i);
+      std::cout << "Pion n° "<< (*it)->getNumPion() <<" diponible pour sortir" << std::endl;
+      pionDispo.push_back( (*it)->getNumPion());
     }
   }
 
+  std::string s= pionDisponible(pionDispo);
+  bool indexValide= false;
+  do{
+    std::cout << "Quel pion ?" << s << ":";
+    std::cin >> pionDeplacer;
 
-  std::cout << "Quel pion ?" << pionDisponible(pionDispo)<< ":";
-  std::cin >> pionDeplacer;
+  for(int j=0 ; j < pionDispo.size(); j++)
+  {
+    if( pionDeplacer == pionDispo[j])
+    {
+      indexValide= true;
+    }
+  }
+
+  }while(!indexValide);
+  
 
   return getPionPtr(pionDeplacer);
 
 }
 
-std::string Joueur::pionDisponible(std::vector<int> v)
+std::string Joueur::pionDisponible(std::vector<int> const& v)
 {
   std::string s= "[ ";
 
-  for(int j; j < v.size(); j++)
+  for(int j=0 ; j < v.size(); j++)
   {
-    s.push_back(v[j]);
+    s += std::to_string(v[j]);
     s+= " , ";
   }
 
-  s.erase( s.end() - 3 );
-  s += "]";
+  s.erase( s.end() - 3, s.end());
+  s += " ]";
   return s;
 }

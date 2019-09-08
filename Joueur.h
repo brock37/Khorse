@@ -39,7 +39,7 @@ class Joueur
         
 
 
-			std::string pionDisponible(std::vector<int> v);
+			std::string pionDisponible(std::vector<int> const& v);
 			Pion* choixJoueur(int de, Choix &choix );
 
 

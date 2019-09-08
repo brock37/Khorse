@@ -31,6 +31,7 @@ class Pion
       int getY(){return m_position.second;}
       Couleur getCouleur(){return m_couleurPion;}
       char getLettre(){return m_lettre;}
+      int getNumPion(){return m_nPion;}
 
    protected:
    private:
