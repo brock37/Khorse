@@ -235,48 +235,54 @@ Pion* Joueur::choixJoueur(int de, Choix &choix )
   std::vector<int> pionDispo;
   int c = 0, pionDeplacer=0;
   //Choix de l'action
-  if(de == 6 || de == 1 )
-  {
-    do
+  do{//On boucle tant qu'aucun pion n'est disponible pour l'action choisis
+
+    if(de == 6 || de == 1 )
     {
-      std::cout << "1.AVANCER / 2.SORTIR" << std::endl;
-      std::cin >> c;
-    }while(c!=AVANCER && c != SORTIR);
-    if(c== 1)
+      do
+      {
+        std::cout << "1.AVANCER / 2.SORTIR" << std::endl;
+        std::cin >> c;
+      }while(c!=AVANCER && c != SORTIR);
+      if(c== 1)
+      {
+        choix= AVANCER;
+      }
+      else
+      {
+        choix= SORTIR;
+      }
+
+    }
+    else if( estPartit())   		//Resultat autre que 6 ou 1
     {
       choix= AVANCER;
     }
     else
     {
-      choix= SORTIR;
+      choix = RIEN;
     }
 
-  }
-  else if( estPartit())   		//Resultat autre que 6 ou 1
-  {
-    choix= AVANCER;
-  }
-  else
-  {
-    choix = RIEN;
-  }
+  //Choix du pion en fonciton de l'action
+    //on creer un tableau qui contient l'index des pions dispo en fonction de
+    //leur status
+    for( std::list< Pion* >::iterator it= m_pions.begin() ; it !=m_pions.end() ; it++)
+    {
+      if( choix == AVANCER && (*it)->estRentrer() == false )
+      {
+        std::cout << "Pion n° "<< (*it)->getNumPion() <<" diponible pour avancer" << std::endl;
+        pionDispo.push_back( (*it)->getNumPion());
+      }
+      else if( choix == SORTIR && (*it)->estRentrer() == true )
+      {
+        std::cout << "Pion n° "<< (*it)->getNumPion() <<" diponible pour sortir" << std::endl;
+        pionDispo.push_back( (*it)->getNumPion());
+      }
+    }
 
-//Choix du pion en fonciton de l'action
-  //on creer un tableau qui contient l'index des pions dispo en fonction de
-  //leur status
-  for( std::list< Pion* >::iterator it= m_pions.begin() ; it !=m_pions.end() ; it++)
-  {
-    if( choix == AVANCER && (*it)->estRentrer() == false )
-    {
-      std::cout << "Pion n° "<< (*it)->getNumPion() <<" diponible pour avancer" << std::endl;
-      pionDispo.push_back( (*it)->getNumPion());
-    }
-    else if( choix == SORTIR && (*it)->estRentrer() == true )
-    {
-      std::cout << "Pion n° "<< (*it)->getNumPion() <<" diponible pour sortir" << std::endl;
-      pionDispo.push_back( (*it)->getNumPion());
-    }
-  }
+
+
+  }while (pionDispo.empty());
 
   std::string s= pionDisponible(pionDispo);
   bool indexValide= false;
