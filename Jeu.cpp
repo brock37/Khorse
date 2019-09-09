@@ -116,7 +116,8 @@ void Jeu::jouerTour(int joueur)
 		}
 	}
 	else 		//Joueur Humain
-	{/*
+	{
+    /*
 		//On propose le choix de l'action suivant le resultat du de
 		if(resDe == 6 || resDe == 1 )
 		{
@@ -197,7 +198,7 @@ void Jeu::jouerTour(int joueur)
 		}
 		else if(choixJoueur == SORTIR)
 		{
-			retour= joueurActuel->sortirCheval( numPion, m_plateau);
+			retour= joueurActuel->sortirCheval( pion->getNumPion(), m_plateau);
 		}
 		else
 		{
