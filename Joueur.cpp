@@ -118,9 +118,9 @@ void Joueur::afficherEtatJoueur()
         if(!(*it)->estRentrer())
         {
           nombreChevauxSortie++;
-          strSortie =strSortie + to_string( (*it)->getNumPion()) + ": " + to_string((*it)->estRentrer());
+          strSortie =strSortie + to_string( (*it)->getNumPion()) + ": " + to_string((*it)->estRentrer()) + "\n";
         }
-            
+
     }
 
     std::cout << "Nombre de pion sortie:" << nombreChevauxSortie << " Chevaux sorite: " << strSortie << std::endl;
