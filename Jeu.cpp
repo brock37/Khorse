@@ -1,26 +1,26 @@
 #include "Jeu.h"
 
-Jeu::Jeu()
+Jeu::Jeu(): m_plateau()
 {
 	 //unsigned int nombrePion=0;
-    
+
 	//Initialiser le plateau
-	m_plateau= Plateau();
-	m_plateau.initialiser();
-	
+	//m_plateau= Plateau();
+	//m_plateau.initialiser();
+
 	//Recuperer parametre de la partie
 	std::cout << "Avec combien de pion voulez-vous jouer? " ;
    m_nombrePion= 4;//cin >> nombrePion;
    std::cout << "Avec combien de joueur voulez-vous jouer? " ;
    m_nombreJoueur= 1;//cin >> nombreAdversaire;
-   
+
 	//Creer les joueurs et pions necessaires
     m_joueur.push_back(new Joueur(&m_plateau,m_nombrePion, ROUGE));
     m_joueur.push_back(new Joueur(&m_plateau,m_nombrePion, BLEU));
     m_joueur.push_back(new Joueur(&m_plateau,m_nombrePion, VERT));
     m_joueur.push_back(new Joueur(&m_plateau,m_nombrePion, JAUNE));
-    
-	
+
+
 }
 
 Jeu::~Jeu()

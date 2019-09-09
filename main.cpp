@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
- 
+
     /* initialize random */
     srand (time(NULL));
 
@@ -18,7 +18,7 @@ int main()
 	system("sleep 1");
 
     Jeu game;
-    Plateau& plateauJeu= game.getPlateau();
+    //Plateau& plateauJeu= game.getPlateau();
     game.jouerPartie();
 
     return 0;
