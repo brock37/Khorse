@@ -299,17 +299,22 @@ Pion* Joueur::choixJoueur(int de, Choix &choix )
 
 }
 
-std::string Joueur::pionDisponible(std::vector<int> const& v)
+std::string Joueur::pionDisponible(std::vector<int>  v)
 {
+  std::cout << "Calcul des pions disponible" << std::endl;
   std::string s= "[ ";
 
   for(int j=0 ; j < v.size(); j++)
   {
+    std::cout << "Ajout du pion :" << j << std::endl;
     s += std::to_string(v[j]);
     s+= " , ";
   }
 
   s.erase( s.end() - 3, s.end());
   s += " ]";
+
+  std::cout << "Fin des pions disponible" << std::endl;
+
   return s;
 }
